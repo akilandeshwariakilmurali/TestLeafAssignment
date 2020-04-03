@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DuplicateLeadAssignment {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		// set the system property
 		System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
@@ -47,8 +47,8 @@ public class DuplicateLeadAssignment {
 		// Click Find Leads Button
 		driver.findElementByXPath("//button[text()='Find Leads']").click();
 		
-		// Implicit wait
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		// wait
+		Thread.sleep(3000);
 		
 		// Capture name of first result
 		String name = driver.findElementByXPath("(//div[@class='x-grid3-cell-inner x-grid3-col-firstName']//a)[1]").getText();
@@ -68,8 +68,13 @@ public class DuplicateLeadAssignment {
 		driver.findElementByClassName("smallSubmit").click();
 		
 		// Confirm duplicated lead name is same as captured name
-		boolean verifyname = driver.findElementById("viewLead_firstName_sp").equals(name);
-		System.out.println(verifyname);
+		String verifyname = driver.findElementById("viewLead_firstName_sp").getText();
+			if(	verifyname.equals(name)) {
+				System.out.println("Confirm duplicated lead name is same as captured name");
+			}
+			else 
+				System.out.println(driver.findElementById("viewLead_firstName_sp").getText());
+	
 		
 		// Close the browser
 		driver.close();

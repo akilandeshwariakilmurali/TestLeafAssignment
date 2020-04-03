@@ -31,10 +31,12 @@ public class Assignment2 {
 		
 		// Enter To Place
 		driver.findElementById("dest").sendKeys("Bangalore");
+		driver.findElementByXPath("//li[text()='Bangalore (All Locations)']").click();
 		
 		// Select the date
 		driver.findElementById("onward_cal").click();
-		driver.findElementByXPath("(//td[text()='30'])[2]").click();
+		Thread.sleep(4000);
+		driver.findElementByXPath("//div[@id='rb-calendar_onward_cal']/table[1]/tbody[1]/tr[7]/td[4]").click();
 		
 		// Click search buses
 		driver.findElementById("search_btn").click();

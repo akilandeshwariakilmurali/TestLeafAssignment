@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Weekend1Assignment1 {
+public class Weekend1Assignment2 {
 
 	public static void main(String[] args) throws InterruptedException {
 		// set the system property
@@ -38,45 +38,44 @@ public class Weekend1Assignment1 {
 		driver.findElementByLinkText("Find Leads").click();
 		Thread.sleep(3000);
 		
-		// Click on Phone
-		driver.findElementByXPath("//span[text()='Phone']").click();
+		// Enter First name
+		driver.findElementByXPath("(//input[@name='firstName'])[3]").sendKeys("Babu");
+		//driver.findElementByName("firstName").sendKeys("Babu");		
 		
-		// Enter Phonenumber
-		driver.findElementByName("phoneNumber").sendKeys("787155");
-		
-		// CLick on Find Leads button
+		// Click Find Leads button
 		driver.findElementByXPath("//button[text()='Find Leads']").click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
-		// Capture the resulting lead
-		String result = driver.findElementByXPath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']//a[1]").getText();
-		System.out.println(result);
+		// Click first resulting lead
+		driver.findElementByXPath("(//div[@class='x-grid3-cell-inner x-grid3-col-firstName']//a)[1]").click();
 		
-		// CLick first resulting lead
-		driver.findElementByXPath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']//a[1]").click();
+		//Verify title
+		String title = driver.getTitle();
+		System.out.println(title);
 		
-		// Click DElete
-		driver.findElementByLinkText("Delete").click();
+		// Click Edit button
+		driver.findElementByLinkText("Edit").click();
 		
-		// Click on Find Leads
-		driver.findElementByLinkText("Find Leads").click();
+		// Edit the company name
+		driver.findElementById("updateLeadForm_companyName").clear();
+		driver.findElementById("updateLeadForm_companyName").sendKeys("Change the company");
+		String name = driver.findElementById("updateLeadForm_companyName").getText();
+		System.out.println(name);
 		
-		// Enter Lead ID
-		driver.findElementByName("id").sendKeys(result);
+		//Click on update button
+		driver.findElementByName("submitButton").click();
 		
-		// CLick on Find Leads button
-		driver.findElementByXPath("//button[text()='Find Leads']").click();
-		Thread.sleep(3000);
+		// Verify the updated name
+		String verifyname = driver.findElementById("viewLead_companyName_sp").getText();
 		
-		// Confirm whether it is deleted
-		String text = driver.findElementByClassName("x-paging-info").getText();
-				if( text.contains("No records to display")) {
-			System.out.println("Lead is successfully deleted");
+		System.out.println(verifyname);
+		if (verifyname.contains(name)) {
+			System.out.println("Name is updated properly");
 		}
 		
-		// Close the browser
+		// close the browser
 		driver.close();
-		}
 		
+		}
 				
 	}

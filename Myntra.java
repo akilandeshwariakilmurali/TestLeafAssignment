@@ -90,11 +90,11 @@ public class Myntra {
 		// Sort by Better discount
 		driver.findElementByXPath("//span[text()='Recommended']").click();
 		driver.findElementByXPath("(//label[@class='sort-label '])[text()='Better Discount']").click();
-
-		driver.findElementByXPath("//div[@class='filter-summary-selectedFilterContainer']").click();
+		Thread.sleep(3000);
+		//driver.findElementByXPath("//div[@class='filter-summary-selectedFilterContainer']").click();
 
 		// Price of first displayed item
-		List<WebElement> price = driver.findElementsByXPath("//span[@class='product-discountedPrice']");
+		List<WebElement> price = driver.findElementsByClassName("product-discountedPrice");
 		String firstPrice = price.get(0).getText();
 		System.out.println("Price of first coat is " + firstPrice);
 

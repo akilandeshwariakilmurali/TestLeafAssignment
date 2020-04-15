@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class LearnSet {
 
 	public static void main(String[] args) {
+		
 		// set the system property
 		System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
 
@@ -20,15 +21,17 @@ public class LearnSet {
 		// Open the URL
 		driver.get("https://erail.in/trains-between-stations/mgr-chennai-ctr-MAS/ksr-bengaluru-SBC");
 
-		
 		// Implicit wait for 10 seconds
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		// Get all the Train Names  
-		List<WebElement> trainNames = driver.findElementsByXPath("//div[@id='divTrainsList']//td[@class=''][1]");
+		List<WebElement> trainNum = driver.findElementsByXPath("//div[@id='divTrainsList']//td[@class=''][1]");
 		
+		//Hashset
 		Set<String> tn = new HashSet<String>();
-		for (WebElement eachTrain : trainNames) {
+		
+		//Iterating each train with for each loop
+		for (WebElement eachTrain : trainNum) {
 			String train = eachTrain.getText();
 			tn.add(train);
 		}
@@ -36,9 +39,12 @@ public class LearnSet {
 		System.out.println(tn);
 		
 		// Confirm no duplicates
-		if(trainNames.size() == tn.size()) {
+		if(trainNum.size() == tn.size()) {
 			System.out.println("No duplicates");
 		}
+		
+		// Close the browser
+		driver.close();
 	}
 
 }

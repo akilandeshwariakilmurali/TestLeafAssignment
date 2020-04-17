@@ -37,9 +37,6 @@ public class Assignment {
 
 		// Click Login button
 		driver.findElementById("sysverb_login").click();
-
-		// Navigate to defaultcontent
-		driver.switchTo().defaultContent();
 		Thread.sleep(3000);
 		
 		// Enter in navigation filter
@@ -59,7 +56,7 @@ public class Assignment {
 		String incnumber = number.getAttribute("value");
 
 		// Click search icon
-		driver.findElementByClassName("icon icon-search").click();
+		driver.findElementById("lookup.incident.caller_id").click();
 
 		// Navigate to window
 
@@ -73,9 +70,7 @@ public class Assignment {
 		driver.findElementByClassName("glide_ref_item_link").click();
 
 		// Navigate back to main window
-		Set<String> allWins = driver.getWindowHandles();
-		List<String> lists = new ArrayList<String>(allWins);
-		String firstWin = lists.get(0);
+		String firstWin = list.get(0);
 		driver.switchTo().window(firstWin);
 
 		// Select category
@@ -130,9 +125,7 @@ public class Assignment {
 		assignmentgroup.click();
 		
 		// Navigate back to main window
-		Set<String> allWins2 = driver.getWindowHandles();
-		List<String> lists2 = new ArrayList<String>(allWins2);
-		String firstWin2 = lists2.get(0);
+		String firstWin2 = list2.get(0);
 		driver.switchTo().window(firstWin2);
 		
 		// Enter short description
